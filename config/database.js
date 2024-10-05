@@ -1,31 +1,3 @@
-// const mongoose = require("mongoose");
-// const time = Date.now();
-// const mongoUrl = process.env.MONGO_URL;
-// const autoIncrement = require("mongoose-auto-increment");
-
-// mongoose.set("strictQuery", false);
-
-// mongoose
-//   .connect(mongoUrl, {
-//     autoIndex: true,
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {})
-//   .catch((err) => console.error("Error connecting to mongo", err))
-//   .finally(() =>
-//     console.log("Mongo connected time", (Date.now() - time) / 1000 + "sec")
-//   );
-
-// const connection = mongoose.connection;
-// autoIncrement.initialize(connection);
-// connection.on("error", (error) => console.error(error));
-// mongoose.Promise = global.Promise;
-
-// if (process.env.MONGO_LOGS === "1") {
-//   mongoose.set("debug", true);
-// }
-
 const mongoose = require("mongoose");
 
 const mongo = {
