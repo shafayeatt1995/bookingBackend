@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { randomKey } = require("../utils");
 const Schema = mongoose.Schema;
-const { plugin } = require("mongoose-auto-increment");
 
 const RoomSchema = new Schema({
   roomTypeID: { type: Schema.Types.ObjectId, required: true },
@@ -61,10 +60,21 @@ const BookingSchema = new Schema(
   }
 );
 
-BookingSchema.plugin(plugin, {
-  model: "Booking",
-  field: "bookingNumber",
-  startAt: 1,
+BookingSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    try {
+      const { Counter } = require(".");
+      const counter = await Counter.findOneAndUpdate(
+        { model: "Booking" },
+        { $inc: { sequenceValue: 1 } },
+        { new: true, upsert: true }
+      );
+      this.bookingNumber = counter.sequenceValue;
+    } catch (error) {
+      return next(error);
+    }
+  }
+  next();
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);

@@ -10,12 +10,12 @@ const cors = require("cors");
 const session = require("cookie-session");
 const bodyParser = require("body-parser");
 const { createSocketServer } = require("./createSocketServer");
-
-require("./config/database");
+const { mongoConnect } = require("./config/database");
+const mongoMiddleware = require("./middleware/mongoMiddleware");
 
 app.use(
   cors({
-    origin: [process.env.BASE_URL],
+    origin: [process.env.BASE_URL, "http://localhost:8080"],
     credentials: true,
   })
 );
@@ -39,7 +39,7 @@ app.use(
   })
 );
 
-app.use("/api", require("./routes"));
+app.use("/api", mongoMiddleware, require("./routes"));
 
 app.use((err, req, res, next) => {
   console.error(err);
@@ -49,4 +49,7 @@ app.use((err, req, res, next) => {
 });
 
 const server = createSocketServer(app);
-server.listen(port);
+server.listen(port, async () => {
+  console.log(`Server is running at http://localhost:${port}`);
+  await mongoConnect();
+});

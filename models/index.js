@@ -13,4 +13,5 @@ module.exports = {
   Booking: require("./Booking"),
   Wishlist: require("./Wishlist"),
   Review: require("./Review"),
+  Counter: require("./Counter"),
 };
