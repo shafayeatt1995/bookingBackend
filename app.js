@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
@@ -48,8 +47,8 @@ app.use((err, req, res, next) => {
     .json({ error: err.message || "Internal server error" });
 });
 
-const server = createSocketServer(app);
-server.listen(port, async () => {
+// const server = createSocketServer(app);
+app.listen(port, async () => {
   console.log(`Server is running at http://localhost:${port}`);
   await mongoConnect();
 });
