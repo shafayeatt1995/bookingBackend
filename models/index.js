@@ -1,0 +1,16 @@
+module.exports = {
+  User: require("./User"),
+  Hotel: require("./Hotel"),
+  Location: require("./Location"),
+  Image: require("./Image"),
+  Room: require("./Room"),
+  Facility: require("./Facility"),
+  Complement: require("./Complement"),
+  BedType: require("./BedType"),
+  ExtraService: require("./ExtraService"),
+  AccommodationType: require("./AccommodationType"),
+  RoomType: require("./RoomType"),
+  Booking: require("./Booking"),
+  Wishlist: require("./Wishlist"),
+  Review: require("./Review"),
+};
