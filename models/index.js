@@ -14,4 +14,8 @@ module.exports = {
   Wishlist: require("./Wishlist"),
   Review: require("./Review"),
   Counter: require("./Counter"),
+  District: require("./District"),
+  Division: require("./Division"),
+  Post: require("./Post"),
+  Raw: require("./Raw"),
 };

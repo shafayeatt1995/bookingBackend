@@ -8,6 +8,8 @@ const {
   BedType,
   Room,
   Booking,
+  District,
+  Division,
 } = require("../models");
 const {
   message,
@@ -533,6 +535,17 @@ const controller = {
       ]);
 
       return res.json({ salesLog });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message });
+    }
+  },
+  async fetchNavbar(req, res) {
+    try {
+      const districts = await District.find();
+      const divisions = await Division.find();
+
+      return res.json({ districts, divisions });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message });

@@ -13,6 +13,14 @@ const {
   fetchReviewSummary,
   fetchAllBedsOnce,
 } = require("../controllers/CommonController");
+const { fetchNavbar } = require("../controllers/CommonController");
+const {
+  fetchPost,
+  fetchPostCount,
+  fetchPosts,
+  fetchDistrictPost,
+  fetchDivisionPost,
+} = require("../controllers/BlogController");
 
 router.get("/home-data", fetchHomeData);
 router.get("/location-property", fetchLocationsProperty);
@@ -25,5 +33,12 @@ router.post("/search-hotels", fetchSearchHotels);
 router.post("/hotel-room-types", fetchHotelRoomTypes);
 router.post("/review", fetchReview);
 router.post("/review-summary", fetchReviewSummary);
+
+router.get("/post-count", fetchPostCount);
+router.get("/posts/:page", fetchPosts);
+router.get("/posts-division/:slug/:page", fetchDivisionPost);
+router.get("/posts-district/:name/:page", fetchDistrictPost);
+router.get("/post/:slug", fetchPost);
+router.get("/navbar", fetchNavbar);
 
 module.exports = router;
