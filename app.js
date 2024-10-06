@@ -14,7 +14,11 @@ const mongoMiddleware = require("./middleware/mongoMiddleware");
 
 app.use(
   cors({
-    origin: [process.env.BASE_URL, "http://localhost:8080"],
+    origin: [
+      process.env.BASE_URL,
+      "http://localhost:8080",
+      "https://cholozai.com",
+    ],
     credentials: true,
   })
 );
