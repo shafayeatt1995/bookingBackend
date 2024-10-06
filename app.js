@@ -14,18 +14,27 @@ const mongoMiddleware = require("./middleware/mongoMiddleware");
 
 app.use(
   cors({
-    origin: [
-      process.env.BASE_URL,
-      "http://localhost:8080",
-      "https://cholozai.com",
-      "https://www.cholozai.com",
-    ],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const allowedOrigins = [
+        process.env.BASE_URL,
+        "http://localhost:8080",
+        "https://cholozai.com",
+        "https://www.cholozai.com",
+      ];
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    optionSuccessStatus: 200,
+    optionsSuccessStatus: 200,
   })
 );
-app.use(fileUpload({ limits: { fileSize: 10 * 1024 * 1024 } }));
 app.options("*", cors());
+app.use(fileUpload({ limits: { fileSize: 10 * 1024 * 1024 } }));
 
 function verifyRequest(req, res, buf, encoding) {
   req.rawBody = buf.toString(encoding);
