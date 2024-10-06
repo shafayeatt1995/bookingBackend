@@ -19,7 +19,6 @@ const mongo = {
       } catch (error) {
         attempts++;
         console.error(`MongoDB connection attempt ${attempts} failed:`, error);
-
         if (attempts === maxRetries) {
           console.error("Failed to connect to MongoDB after maximum retries.");
           throw new Error("MongoDB connection error");
