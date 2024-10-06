@@ -18,11 +18,14 @@ app.use(
       process.env.BASE_URL,
       "http://localhost:8080",
       "https://cholozai.com",
+      "https://www.cholozai.com",
     ],
     credentials: true,
+    optionSuccessStatus: 200,
   })
 );
 app.use(fileUpload({ limits: { fileSize: 10 * 1024 * 1024 } }));
+app.options("*", cors());
 
 function verifyRequest(req, res, buf, encoding) {
   req.rawBody = buf.toString(encoding);
