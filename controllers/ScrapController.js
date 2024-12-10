@@ -552,7 +552,6 @@ const controller = {
 
         const slug = stringSlug(title);
         count++;
-        console.log(count);
         await Post.updateOne({ _id: post._id }, { title: title.trim(), slug });
       }
 
@@ -568,7 +567,6 @@ const controller = {
 
       const newSlug = stringSlug(title);
       count++;
-      console.log(count);
       await Post.updateOne(
         { slug },
         { title: title.trim(), slug: newSlug, content, bnTitle, bnContent }
@@ -599,7 +597,6 @@ const controller = {
         if (updated) {
           try {
             count++;
-            console.log(count);
             await post.updateOne({ content: updatedContent });
           } catch (err) {
             console.error(`Update error for post ID ${post._id}:`, err);
@@ -638,7 +635,6 @@ const controller = {
         if (updated) {
           try {
             count++;
-            console.log(count);
             await post.updateOne({ bnContent: updatedContent });
           } catch (err) {
             console.error(`Update error for post ID ${post._id}:`, err);
@@ -732,7 +728,6 @@ const controller = {
           await Post.updateOne({ url: pageUrl }, postData, { upsert: true });
           await Raw.updateOne({ url: pageUrl }, { done: true });
           count++;
-          console.log(count, pageUrl);
 
           await vromon.close();
         }
@@ -795,7 +790,6 @@ const controller = {
         const url = m[1];
         await Raw.updateOne({ name, url }, { name, url }, { upsert: true });
         count++;
-        console.log(count);
         return url;
       });
 
@@ -862,7 +856,6 @@ const controller = {
           });
 
           count++;
-          console.log(count, post.slug);
 
           await Post.updateOne({ slug: post.slug }, { $set: postData });
           await page.close();
@@ -968,7 +961,6 @@ const controller = {
               await findPost.save();
               convert.push({ text, generate });
               count++;
-              console.log(count);
             }
           }
         }
@@ -999,7 +991,6 @@ const controller = {
 
           await findPost.save();
           count++;
-          console.log(count);
         }
       }
       count = 0;
@@ -1100,7 +1091,6 @@ const controller = {
           count++;
           await Post.updateOne({ _id: post._id }, { bnContent: newContent });
           await vromon.close();
-          console.log(count);
         }
       }
       count = 0;
