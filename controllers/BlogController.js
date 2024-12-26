@@ -1,5 +1,11 @@
 const { Post, District, Division } = require("../models");
-const { message, paginate, startDate, objectID } = require("../utils");
+const {
+  message,
+  paginate,
+  startDate,
+  objectID,
+  randomDate,
+} = require("../utils");
 const perPage = 24;
 const subtractDays = (date, days) =>
   startDate(new Date(date.getTime() - days * 24 * 60 * 60 * 1000));
@@ -43,14 +49,22 @@ const controller = {
         _id: objectID(district?.divisionID),
       });
 
-      // .select({ url: 0 });
       const related = await Post.aggregate([
         { $match: { districtID: post.districtID, _id: { $ne: post._id } } },
         { $sample: { size: 3 } },
-        // { $project: { url: 0 } },
       ]);
 
-      return res.json({ post, related, division });
+      const others = await Post.aggregate([
+        {
+          $match: {
+            districtID: post.districtID,
+            _id: { $ne: [post._id, ...related.map(({ _id }) => _id)] },
+          },
+        },
+        { $sample: { size: 3 } },
+      ]);
+
+      return res.json({ post, related, division, others });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message });
@@ -87,6 +101,23 @@ const controller = {
       ]);
 
       return res.json({ posts });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message });
+    }
+  },
+  async updatePostDate(req, res) {
+    try {
+      let count = 0;
+      const twoMonthAgo = subtractDays(new Date(), 30);
+      const posts = await Post.find({});
+      for (const post of posts) {
+        console.log(++count);
+        const postDate = randomDate(twoMonthAgo, new Date());
+        await Post.updateOne({ _id: post._id }, { postDate });
+      }
+
+      return res.json({ success: true });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message });

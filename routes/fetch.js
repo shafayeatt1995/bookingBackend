@@ -20,6 +20,7 @@ const {
   fetchPosts,
   fetchDistrictPost,
   fetchDivisionPost,
+  updatePostDate,
 } = require("../controllers/BlogController");
 
 router.get("/home-data", fetchHomeData);
@@ -40,5 +41,6 @@ router.get("/posts-division/:slug/:page", fetchDivisionPost);
 router.get("/posts-district/:name/:page", fetchDistrictPost);
 router.get("/post/:slug", fetchPost);
 router.get("/navbar", fetchNavbar);
+router.get("/update-post-date", updatePostDate);
 
 module.exports = router;

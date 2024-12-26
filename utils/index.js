@@ -249,6 +249,12 @@ const utils = {
       )
     ).size;
   },
+
+  randomDate(date1 = new Date(), date2 = new Date()) {
+    return new Date(
+      date1.getTime() + Math.random() * (date2.getTime() - date1.getTime())
+    );
+  },
 };
 
 module.exports = utils;
