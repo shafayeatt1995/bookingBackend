@@ -10,5 +10,6 @@ router.use("/facility", require("./facility"));
 router.use("/accommodation-type", require("./accommodation-type"));
 router.use("/bed-type", require("./bed-type"));
 router.use("/room-type", require("./room-type"));
+router.use("/blog", require("./blog"));
 
 module.exports = router;

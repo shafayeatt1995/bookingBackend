@@ -18,4 +18,5 @@ module.exports = {
   Division: require("./Division"),
   Post: require("./Post"),
   Raw: require("./Raw"),
+  Country: require("./Country"),
 };

@@ -22,6 +22,7 @@ const {
   fetchDivisionPost,
   updatePostDate,
 } = require("../controllers/BlogController");
+const { Raw } = require("../models");
 
 router.get("/home-data", fetchHomeData);
 router.get("/location-property", fetchLocationsProperty);
@@ -42,5 +43,18 @@ router.get("/posts-district/:name/:page", fetchDistrictPost);
 router.get("/post/:slug", fetchPost);
 router.get("/navbar", fetchNavbar);
 router.get("/update-post-date", updatePostDate);
+router.post("/demo-post", async (req, res) => {
+  try {
+    console.log(req.body);
+    const { slug } = req.body;
+    const item = await Raw.findOne({ name: "demo-post", "url.slug": slug });
+    return res.json({ item });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong. Please try again.",
+    });
+  }
+});
 
 module.exports = router;

@@ -28,6 +28,8 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
     "puppeteer": "^23.5.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "sass": "^1.74.1",
     "sass-loader": "10",
     "sharp": "^0.32.6",

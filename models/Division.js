@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const DivisionSchema = new Schema(
   {
+    countryID: { type: Schema.Types.ObjectId, required: true },
     name: { type: String, required: true },
-    bnName: { type: String, required: true },
     slug: { type: String, unique: true, index: true, lowercase: true },
   },
   {

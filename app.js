@@ -19,6 +19,7 @@ app.use(
       const allowedOrigins = [
         process.env.BASE_URL,
         "http://localhost:8080",
+        "http://192.168.0.106:8080",
         "https://cholozai.com",
         "https://www.cholozai.com",
       ];

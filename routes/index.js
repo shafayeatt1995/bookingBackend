@@ -19,6 +19,7 @@ router.get("/check-connect", async (req, res) => {
 router.use("/fetch", require("./fetch"));
 router.use("/scrap", require("./scrap"));
 router.use("/auth", require("./auth"));
+router.use("/anik", require("./anik"));
 
 router.use(isAuthenticated);
 router.use("/admin", require("./admin"));

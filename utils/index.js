@@ -8,11 +8,13 @@ const utils = {
   utapi: new UTApi(),
   message: "Internal server error",
 
-  stringSlug(string) {
+  stringSlug(string, sign = "-") {
     return string
       .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\-]/g, "");
+      .replace(/[\s_&]+/g, sign)
+      .replace(/-+/g, sign)
+      .replace(/[^\w\-]/g, "")
+      .replace(/^-|-$/g, "");
   },
 
   randomKey(length = 5, stringOnly = false) {
