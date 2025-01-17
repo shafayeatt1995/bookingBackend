@@ -54,17 +54,7 @@ const controller = {
         { $sample: { size: 3 } },
       ]);
 
-      const others = await Post.aggregate([
-        {
-          $match: {
-            districtID: post.districtID,
-            _id: { $ne: [post._id, ...related.map(({ _id }) => _id)] },
-          },
-        },
-        { $sample: { size: 3 } },
-      ]);
-
-      return res.json({ post, related, division, others });
+      return res.json({ post, related, division });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message });
